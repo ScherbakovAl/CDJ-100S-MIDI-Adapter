@@ -18,6 +18,12 @@ RM := rm -rf
 -include objects.mk
 
 ifneq ($(MAKECMDGOALS),clean)
+ifneq ($(strip $(S_DEPS)),)
+-include $(S_DEPS)
+endif
+ifneq ($(strip $(S_UPPER_DEPS)),)
+-include $(S_UPPER_DEPS)
+endif
 ifneq ($(strip $(C_DEPS)),)
 -include $(C_DEPS)
 endif
@@ -25,26 +31,34 @@ endif
 
 -include ../makefile.defs
 
+BUILD_ARTIFACT_NAME := Midi-STM
+BUILD_ARTIFACT_EXTENSION := elf
+BUILD_ARTIFACT_PREFIX := 
+BUILD_ARTIFACT := $(BUILD_ARTIFACT_PREFIX)$(BUILD_ARTIFACT_NAME).$(BUILD_ARTIFACT_EXTENSION)
+
 # Add inputs and outputs from these tool invocations to the build variables 
 EXECUTABLES += \
-CDJ_Control_C8.elf \
+Midi-STM.elf \
 
 SIZE_OUTPUT += \
 default.size.stdout \
 
 OBJDUMP_LIST += \
-CDJ_Control_C8.list \
+Midi-STM.list \
 
 OBJCOPY_HEX += \
-CDJ_Control_C8.hex \
+Midi-STM.hex \
 
 
 # All Target
-all: CDJ_Control_C8.elf secondary-outputs
+all: main-build
+
+# Main-build Target
+main-build: Midi-STM.elf secondary-outputs
 
 # Tool invocations
-CDJ_Control_C8.elf: $(OBJS) $(USER_OBJS) ../STM32F103C8Tx_FLASH.ld
-	arm-none-eabi-gcc -o "CDJ_Control_C8.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"../STM32F103C8Tx_FLASH.ld" --specs=nosys.specs -Wl,-Map="CDJ_Control_C8.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Midi-STM.elf: $(OBJS) $(USER_OBJS) ../STM32F103C8Tx_FLASH.ld
+	arm-none-eabi-gcc -o "Midi-STM.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"../STM32F103C8Tx_FLASH.ld" --specs=nosys.specs -Wl,-Map="Midi-STM.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
@@ -53,13 +67,13 @@ default.size.stdout: $(EXECUTABLES)
 	@echo 'Finished building: $@'
 	@echo ' '
 
-CDJ_Control_C8.list: $(EXECUTABLES)
-	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "CDJ_Control_C8.list"
+Midi-STM.list: $(EXECUTABLES)
+	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "Midi-STM.list"
 	@echo 'Finished building: $@'
 	@echo ' '
 
-CDJ_Control_C8.hex: $(EXECUTABLES)
-	arm-none-eabi-objcopy  -O ihex $(EXECUTABLES) "CDJ_Control_C8.hex"
+Midi-STM.hex: $(EXECUTABLES)
+	arm-none-eabi-objcopy  -O ihex $(EXECUTABLES) "Midi-STM.hex"
 	@echo 'Finished building: $@'
 	@echo ' '
 
@@ -70,7 +84,14 @@ clean:
 
 secondary-outputs: $(SIZE_OUTPUT) $(OBJDUMP_LIST) $(OBJCOPY_HEX)
 
-.PHONY: all clean dependents
+fail-specified-linker-script-missing:
+	@echo 'Error: Cannot find the specified linker script. Check the linker settings in the build configuration.'
+	@exit 2
+
+warn-no-linker-script-specified:
+	@echo 'Warning: No linker script specified. Check the linker settings in the build configuration.'
+
+.PHONY: all clean dependents fail-specified-linker-script-missing warn-no-linker-script-specified
 .SECONDARY:
 
 -include ../makefile.targets

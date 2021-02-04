@@ -1,6 +1,6 @@
 Middlewares/ST/STM32_USB_Device_Library/Class/MIDI/Src/usbd_midi.o: \
  ../Middlewares/ST/STM32_USB_Device_Library/Class/MIDI/Src/usbd_midi.c \
- C:/workspace/CDJ_Control_C8/Middlewares/ST/STM32_USB_Device_Library/Class/MIDI/Inc/usbd_midi.h \
+ /Users/scherbakov.al/git/Midi-stm/Middlewares/ST/STM32_USB_Device_Library/Class/MIDI/Inc/usbd_midi.h \
  ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ioreq.h \
  ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h \
  ../Inc/usbd_conf.h ../Inc/main.h \
@@ -40,7 +40,7 @@ Middlewares/ST/STM32_USB_Device_Library/Class/MIDI/Src/usbd_midi.o: \
  ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h \
  ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ctlreq.h
 
-C:/workspace/CDJ_Control_C8/Middlewares/ST/STM32_USB_Device_Library/Class/MIDI/Inc/usbd_midi.h:
+/Users/scherbakov.al/git/Midi-stm/Middlewares/ST/STM32_USB_Device_Library/Class/MIDI/Inc/usbd_midi.h:
 
 ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ioreq.h:
 

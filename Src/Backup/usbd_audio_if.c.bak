@@ -148,7 +148,7 @@ USBD_AUDIO_ItfTypeDef USBD_AUDIO_fops_FS =
   * @brief  Initializes the AUDIO media low layer over USB FS IP
   * @param  AudioFreq: Audio frequency used to play the audio stream.
   * @param  Volume: Initial volume level (from 0 (Mute) to 100 (Max))
-  * @param  options: Reserved for future use 
+  * @param  options: Reserved for future use
   * @retval USBD_OK if all operations are OK else USBD_FAIL
   */
 static int8_t AUDIO_Init_FS(uint32_t AudioFreq, uint32_t Volume, uint32_t options)

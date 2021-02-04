@@ -81,7 +81,7 @@
 
 /* USER CODE BEGIN PV */
 /* Private variables ---------------------------------------------------------*/
-uint8_t Hold_On[4] = {0x08, 0x90, 0x40, 0x47};
+ uint8_t Hold_On[4] = {0x08, 0x90, 0x40, 0x47};
  uint8_t Hold_Off[4] = {0x08, 0x80, 0x40, 0x47};
 
  uint8_t Time_On[4] = {0x08, 0x90, 0x41, 0x47};
@@ -182,7 +182,9 @@ int main(void)
   MX_TIM3_Init();
   MX_TIM4_Init();
   /* USER CODE BEGIN 2 */
-  NVIC_DisableIRQ(EXTI15_10_IRQn);
+  MX_USB_DEVICE_Init();
+  HAL_Delay(3000);
+  //NVIC_DisableIRQ(EXTI15_10_IRQn);
   // start ADC for pitch slider
   HAL_ADCEx_Calibration_Start(&hadc1);
   HAL_ADC_Start_DMA(&hadc1, (uint32_t*)&adc_data, 200);
@@ -191,30 +193,34 @@ int main(void)
   // start TIM4 for jog encoder
   HAL_TIM_Encoder_Start_IT(&htim4, TIM_CHANNEL_1 | TIM_CHANNEL_2);
   // check if USB cable is plugged in
-  if(HAL_GPIO_ReadPin(USB_VBUS_GPIO_Port, USB_VBUS_Pin) == GPIO_PIN_RESET) {
-	  usb_status = DISCONNECTED;
-	  Display_DataTx(Disconnected, 4);
-  }
-  else {
-	  usb_status = PLUGGED;
-	  HAL_GPIO_WritePin(USB_DISCONNECT_GPIO_Port, USB_DISCONNECT_Pin,
-			  GPIO_PIN_RESET);
-	  MX_USB_DEVICE_Init();
-	  HAL_Delay(1000);
-	  usb_status = CONNECTED;
-	  Display_DataTx(Connected, 4);
-  }
-  NVIC_EnableIRQ(EXTI15_10_IRQn);
+//  if(HAL_GPIO_ReadPin(USB_VBUS_GPIO_Port, USB_VBUS_Pin) == GPIO_PIN_RESET) {
+//	  usb_status = DISCONNECTED;
+//	  Display_DataTx(Disconnected, 4);
+//  }
+//  else {
+//	  usb_status = PLUGGED;
+//	  HAL_GPIO_WritePin(USB_DISCONNECT_GPIO_Port, USB_DISCONNECT_Pin,
+//			  GPIO_PIN_RESET);
+//	  MX_USB_DEVICE_Init();
+//	  HAL_Delay(1000);
+//	  usb_status = CONNECTED;
+//	  Display_DataTx(Connected, 4);
+//  }
+  //NVIC_EnableIRQ(EXTI15_10_IRQn);
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+
+  //HAL_Delay(5000);
+
   while (1)
   {
-	  Keyboard_Read();
-	  HAL_Delay(25);
-	  Display_DataRx();
-	  HAL_Delay(25);
+//	  Keyboard_Read();
+	  MIDI_DataTx(Play_On, 4);
+	  HAL_Delay(750);
+//	  Display_DataRx();
+//	  HAL_Delay(25);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -233,7 +239,7 @@ void SystemClock_Config(void)
   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
   RCC_PeriphCLKInitTypeDef PeriphClkInit = {0};
 
-  /** Initializes the CPU, AHB and APB busses clocks 
+  /** Initializes the CPU, AHB and APB busses clocks
   */
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
   RCC_OscInitStruct.HSEState = RCC_HSE_ON;
@@ -241,12 +247,12 @@ void SystemClock_Config(void)
   RCC_OscInitStruct.HSIState = RCC_HSI_ON;
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
-  RCC_OscInitStruct.PLL.PLLMUL = RCC_PLL_MUL12;
+  RCC_OscInitStruct.PLL.PLLMUL = RCC_PLL_MUL9;
   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
   {
     Error_Handler();
   }
-  /** Initializes the CPU, AHB and APB busses clocks 
+  /** Initializes the CPU, AHB and APB busses clocks
   */
   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
                               |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
@@ -255,13 +261,13 @@ void SystemClock_Config(void)
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
 
-  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_1) != HAL_OK)
+  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_2) != HAL_OK)
   {
     Error_Handler();
   }
   PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_ADC|RCC_PERIPHCLK_USB;
-  PeriphClkInit.AdcClockSelection = RCC_ADCPCLK2_DIV4;
-  PeriphClkInit.UsbClockSelection = RCC_USBCLKSOURCE_PLL;
+  PeriphClkInit.AdcClockSelection = RCC_ADCPCLK2_DIV6;
+  PeriphClkInit.UsbClockSelection = RCC_USBCLKSOURCE_PLL_DIV1_5;
   if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)
   {
     Error_Handler();
@@ -597,7 +603,7 @@ void Error_Handler(void)
   * @retval None
   */
 void assert_failed(uint8_t *file, uint32_t line)
-{ 
+{
   /* USER CODE BEGIN 6 */
   /* User can add his own implementation to report the file name and line number,
      tex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */

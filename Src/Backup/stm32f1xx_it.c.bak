@@ -93,7 +93,7 @@ extern uint8_t Pitch[4];
 /* USER CODE END EV */
 
 /******************************************************************************/
-/*           Cortex-M3 Processor Interruption and Exception Handlers          */ 
+/*           Cortex-M3 Processor Interruption and Exception Handlers          */
 /******************************************************************************/
 /**
   * @brief This function handles Non maskable interrupt.
@@ -340,26 +340,26 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc)
 }
 
 // USB cable plugged/unplugged interrupt
-void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
-	if(GPIO_Pin == USB_VBUS_Pin) {
-		if(HAL_GPIO_ReadPin(USB_VBUS_GPIO_Port, USB_VBUS_Pin) == GPIO_PIN_SET) {
-			usb_status = PLUGGED;
-			HAL_GPIO_WritePin(USB_DISCONNECT_GPIO_Port, USB_DISCONNECT_Pin,
-					GPIO_PIN_RESET);
-			MX_USB_DEVICE_Init();
-			usb_status = CONNECTED;
-			Display_DataTx(Connected, 4);
-		}
-		else {
-			usb_status = UNPLUGGED;
-			HAL_GPIO_WritePin(USB_DISCONNECT_GPIO_Port, USB_DISCONNECT_Pin,
-					  GPIO_PIN_SET);
-			USBD_Stop(&hUsbDeviceFS);
-			usb_status = DISCONNECTED;
-			Display_DataTx(Disconnected, 4);
-		}
-	}
-}
+//void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
+//	if(GPIO_Pin == USB_VBUS_Pin) {
+//		if(HAL_GPIO_ReadPin(USB_VBUS_GPIO_Port, USB_VBUS_Pin) == GPIO_PIN_SET) {
+//			usb_status = PLUGGED;
+//			HAL_GPIO_WritePin(USB_DISCONNECT_GPIO_Port, USB_DISCONNECT_Pin,
+//					GPIO_PIN_RESET);
+//			MX_USB_DEVICE_Init();
+//			usb_status = CONNECTED;
+//			Display_DataTx(Connected, 4);
+//		}
+//		else {
+//			usb_status = UNPLUGGED;
+//			HAL_GPIO_WritePin(USB_DISCONNECT_GPIO_Port, USB_DISCONNECT_Pin,
+//					  GPIO_PIN_SET);
+//			USBD_Stop(&hUsbDeviceFS);
+//			usb_status = DISCONNECTED;
+//			Display_DataTx(Disconnected, 4);
+//		}
+//	}
+//}
 
 /* USER CODE END 1 */
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

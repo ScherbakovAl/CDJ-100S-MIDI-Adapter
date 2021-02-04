@@ -1,26 +1,59 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <ScratchFile FileVersion="3.0">
   <FileVersion>3.0</FileVersion>
   <Workspace>
     <WorkspaceType>Single-project</WorkspaceType>
-    <WorkspacePath>C:\workspace\CDJ_Control_C8\</WorkspacePath>
+    <WorkspacePath>/Users/scherbakov.al/git/Midi-stm/</WorkspacePath>
     <underRoot>true</underRoot>
     <TrustZone>0</TrustZone>
-    <HAL_Driver>C:\Users\teren\STM32Cube\Repository\STM32Cube_FW_F1_V1.8.0</HAL_Driver>
+    <HAL_Driver>/Users/scherbakov.al/STM32Cube/Repository//STM32Cube_FW_F1_V1.8.0</HAL_Driver>
     <CMSIS>Drivers/CMSIS</CMSIS>
     <Toolchain>STM32CubeIDE</Toolchain>
     <IocFile>CDJ_Control_C8.ioc</IocFile>
     <Project>
       <ProjectName>CDJ_Control_C8</ProjectName>
       <ProjectNature>C</ProjectNature>
-      <Secure/>
+      <Secure />
       <filestoremove>
         <file>
-          <name>Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_spi_ex.c</name>
+          <name>Src\main.c</name>
+        </file>
+        <file>
+          <name>Src\gpio.c</name>
+        </file>
+        <file>
+          <name>Src\adc.c</name>
+        </file>
+        <file>
+          <name>Src\dma.c</name>
+        </file>
+        <file>
+          <name>Src\spi.c</name>
+        </file>
+        <file>
+          <name>Src\tim.c</name>
+        </file>
+        <file>
+          <name>Src\usb_device.c</name>
+        </file>
+        <file>
+          <name>Src\usbd_conf.c</name>
+        </file>
+        <file>
+          <name>Src\usbd_desc.c</name>
+        </file>
+        <file>
+          <name>Src\usbd_audio_if.c</name>
+        </file>
+        <file>
+          <name>Src\stm32f1xx_it.c</name>
+        </file>
+        <file>
+          <name>Src\stm32f1xx_hal_msp.c</name>
         </file>
       </filestoremove>
       <sourceEntriesToRemove>
-        <sourceEntry/>
+        <sourceEntry />
       </sourceEntriesToRemove>
       <configs>
         <config>
@@ -29,51 +62,51 @@
           <sourceStructure>Basic</sourceStructure>
           <device>STM32F103C8Tx</device>
           <cpucore>Arm Cortex-M3</cpucore>
-          <fpu>none</fpu>
+          <fpu>None</fpu>
           <memories>
-            <memory access="xrw" name="RAM" size="20" start="0x20000000"/>
-            <memory access="rx" name="FLASH" size="64" start="0x8000000"/>
+            <memory access="xrw" name="RAM" size="20" start="0x20000000" />
+            <memory access="rx" name="FLASH" size="64" start="0x8000000" />
           </memories>
-          <startup>C:\Users\teren\STM32Cube\Repository\STM32Cube_FW_F1_V1.8.0\Drivers\CMSIS\Device\ST\STM32F1xx\Source\Templates\gcc\startup_stm32f103xb.s</startup>
+          <startup>/Users/scherbakov.al/STM32Cube/Repository/STM32Cube_FW_F1_V1.8.0/Drivers/CMSIS/Device\ST\STM32F1xx\Source\Templates\gcc\startup_stm32f103xb.s</startup>
           <LinkSettings>
-            <LinkAdditionalLibs/>
+            <LinkAdditionalLibs />
           </LinkSettings>
           <heapSize>0x200</heapSize>
           <stackSize>0x400</stackSize>
           <board>custom</board>
           <debugprobe>swd</debugprobe>
-          <optimization/>
+          <optimization />
           <Aincludes>
-            <include/>
+            <include />
           </Aincludes>
-          <Adefines/>
+          <Adefines />
           <Cdefines>
             <define>USE_HAL_DRIVER</define>
             <define>STM32F103xB</define>
           </Cdefines>
-          <Ldefines/>
+          <Ldefines />
           <Cincludes>
             <include>Inc</include>
-            <include>Drivers\STM32F1xx_HAL_Driver\Inc</include>
-            <include>Drivers\STM32F1xx_HAL_Driver\Inc\Legacy</include>
-            <include>Middlewares\ST\STM32_USB_Device_Library\Core\Inc</include>
-            <include>Middlewares\ST\STM32_USB_Device_Library\Class\AUDIO\Inc</include>
-            <include>Drivers\CMSIS\Device\ST\STM32F1xx\Include</include>
-            <include>Drivers\CMSIS\Include</include>
+            <include>Drivers/STM32F1xx_HAL_Driver/Inc</include>
+            <include>Drivers/STM32F1xx_HAL_Driver/Inc/Legacy</include>
+            <include>Middlewares/ST/STM32_USB_Device_Library/Core/Inc</include>
+            <include>Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Inc</include>
+            <include>Drivers/CMSIS/Device/ST/STM32F1xx/Include</include>
+            <include>Drivers/CMSIS/Include</include>
           </Cincludes>
           <definestoremove>
-            <Adefines/>
+            <Adefines />
             <Cdefines>
               <define>USE_FULL_LL_DRIVER</define>
               <define>MBEDTLS_CONFIG_FILE="mbedtls_config.h"</define>
             </Cdefines>
-            <Ldefines/>
+            <Ldefines />
           </definestoremove>
           <inctoremove>
             <Aincludes>
-              <include/>
+              <include />
             </Aincludes>
-            <Cincludes/>
+            <Cincludes />
           </inctoremove>
         </config>
       </configs>
@@ -89,7 +122,8 @@
           <name>Middlewares</name>
         </sourceEntry>
       </sourceEntries>
-      <Groups/>
+      <Groups />
     </Project>
   </Workspace>
 </ScratchFile>
+

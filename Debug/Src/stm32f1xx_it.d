@@ -29,7 +29,7 @@ Src/stm32f1xx_it.o: ../Src/stm32f1xx_it.c ../Inc/main.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_usb.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pcd_ex.h \
  ../Inc/stm32f1xx_it.h ../Inc/usbd_midi_if.h \
- C:/workspace/CDJ_Control_C8/Middlewares/ST/STM32_USB_Device_Library/Class/MIDI/Inc/usbd_midi.h \
+ /Users/scherbakov.al/git/Midi-stm/Middlewares/ST/STM32_USB_Device_Library/Class/MIDI/Inc/usbd_midi.h \
  ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ioreq.h \
  ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h \
  ../Inc/usbd_conf.h ../Inc/main.h \
@@ -104,7 +104,7 @@ Src/stm32f1xx_it.o: ../Src/stm32f1xx_it.c ../Inc/main.h \
 
 ../Inc/usbd_midi_if.h:
 
-C:/workspace/CDJ_Control_C8/Middlewares/ST/STM32_USB_Device_Library/Class/MIDI/Inc/usbd_midi.h:
+/Users/scherbakov.al/git/Midi-stm/Middlewares/ST/STM32_USB_Device_Library/Class/MIDI/Inc/usbd_midi.h:
 
 ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ioreq.h:
 
